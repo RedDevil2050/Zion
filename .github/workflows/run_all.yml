@@ -1,0 +1,19 @@
+name: Run Analysis
+on:
+  workflow_dispatch:
+    inputs:
+      symbol:
+        description: 'Stock symbol to analyze'
+        required: true
+        type: string
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Run analysis
+        run: python run_all.py ${{ github.event.inputs.symbol }}
